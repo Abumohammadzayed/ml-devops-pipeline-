@@ -1,21 +1,15 @@
 pipeline {
-  agent any
-
-  stages {
-    stage('Install requirements') {
-      steps {
-        sh 'pip install -r requirements.txt'
-      }
+    agent any
+    stages {
+        stage('Install requirements') {
+            steps {
+                bat 'pip install -r requirements.txt'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                bat 'pytest'
+            }
+        }
     }
-    stage('Run tests') {
-      steps {
-        sh 'pytest tests/'
-      }
-    }
-    stage('Train Model') {
-      steps {
-        sh 'python src/train.py'
-      }
-    }
-  }
 }
